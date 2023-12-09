@@ -44,4 +44,76 @@ print(result2)
 <img width="960" alt="image" src="https://github.com/santhoshhk/Prudent-AI/assets/114757338/ac670dae-4d6e-4755-b08b-1170143240c0">
 
 
+### Task 2
+
+```
+import json
+
+def extract_info_from_json(json_data):
+    # Initialize variables to store extracted information
+    invoice_date = ""
+    invoice_number = ""
+    billing_info = ""
+    shipping_info = ""
+    email = ""
+    total_invoice_amount = ""
+    num_items = ""
+
+    # Loop through the JSON data
+    for entry in json_data:
+        key = list(entry.keys())[0]
+        values = entry[key]
+
+        # Extract text based on the key
+        if key == "06/10/2021":
+            invoice_date = " ".join(map(str, values))
+        elif key == "INVO-005":
+            invoice_number = " ".join(map(str, values))
+        elif key == "Billing Information":
+            billing_info = " ".join(map(str, values))
+        elif key == "Shipping Information":
+            shipping_info = " ".join(map(str, values))
+        elif key == "Email":
+            email = " ".join(map(str, values))
+        elif key == "Total Invoice Amount":
+            total_invoice_amount = " ".join(map(str, values))
+        elif key == "Number of Items in the Invoice":
+            num_items = " ".join(map(str, values))
+
+    # Return the extracted information
+    return {
+        "Invoice Date": invoice_date,
+        "Invoice Number": invoice_number,
+        "Billing Information": billing_info,
+        "Shipping Information": shipping_info,
+        "Email": email,
+        "Total Invoice Amount": total_invoice_amount,
+        "Number of Items in the Invoice": num_items
+    }
+
+
+json_file_path = "sample_invoice.json"
+
+def read_json_file(file_path):
+    try:
+        with open(file_path, "r") as json_file:
+            json_data = json.load(json_file)
+            return json_data
+    except FileNotFoundError:
+        print(f"File not found: {file_path}")
+        return None
+    except json.JSONDecodeError as e:
+        print(f"Error decoding JSON: {e}")
+        return None
+
+json_data = read_json_file(json_file_path)
+
+result = extract_info_from_json(json_data)
+
+print(result)
+
+
+```
+
+![task 2 op](https://github.com/santhoshhk/Prudent-AI/assets/114757338/dc6bd5c2-0bd7-4a22-8507-ba958203e45a)
 
