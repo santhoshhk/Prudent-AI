@@ -119,6 +119,8 @@ print(result)
 
 ### Task 3
 
+The data file and ipynb file has been uploaded above.
+
 ```
 import numpy as np
 import pandas as pd
